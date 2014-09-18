@@ -1,0 +1,19 @@
+
+If you want to use Git to download Ramp (and future updates),
+read this online [Getting Started - Installing Git][git] documentation.
+The [Set Up Git][git-setup] document is also helpful.
+
+On Debian,
+apt-get install libcurl4-gnutls-dev libexpat1-dev gettext \
+  libz-dev libssl-dev
+apt-get install git
+
+Initial configuration:  (use your own username & email address, obviously)
+
+git config --global user.name "Alyce Brady"
+git config --global user.email abrady@kzoo.edu
+git config --global merge.tool vimdiff
+git config --global credential.helper cache
+git config --global credential.helper 'cache --timeout=3600'
+git config --global color.ui true
+

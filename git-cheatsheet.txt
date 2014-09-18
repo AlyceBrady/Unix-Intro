@@ -1,0 +1,203 @@
+
+Getting Help
+
+Three alternatives to getting the manual page (manpage) for any Git command:
+    $ git help <verb>
+    $ git <verb> --help
+    $ man git-<verb>
+
+General setup recommendation:
+    git config --global color.ui true   [turns on color for git statements]
+
+Updating Git:
+
+If you already have Git installed, you can get the latest development
+version via Git itself:
+    git clone https://github.com/git/git.git
+
+Downloading a Read-Only Application:
+    To get a public project that you only plan to USE, not modify:
+        curl -L -o ramp.zip \
+            https://api.github.com/repos/AlyceBrady/ramp/zipball/master
+    If it is not a public project, you need to authenticate:
+        curl -u 'username' -L -o foo-dev.zip \
+            https://github.com/$USER/$REPO/$PKGTYPE/$BRANCHorTAG
+            # Enter host password for user 'username': [type password]
+    How about this suggestion: git clone --depth=0  ???
+
+Creating a repository:
+    For an existing project:
+        * Go to the project's directory
+        * git init  [then do `add`s and `commit`]
+    For an existing repository:
+          git clone git://github.com/schacon/grit.git  [or whatever]
+      OR
+          git clone git://github.com/schacon/grit.git mygrit [new name]
+    If not a collaborator for the original repository, fork it first:
+        * Use Fork button on GitHub web page. [now have own copy on GitHub]
+        * git clone git://github.com/myUserName/ramp.git [or whatever]
+
+Renaming files:  Do this using Git, not the UNIX `mv` command!
+    To rename or move a file:
+        git mv filename newFilename
+    If the file has been moved outside of Git, just do a `git rm` and
+    `git add`; Git figures out this this is a rename (according to SCM):
+        git rm README.txt
+        git add README
+
+Recording changes:
+    To see what is new, modified, untracked, etc:
+        git status
+    To stage files (new or modified) for commit:
+        git add <file>
+    To see what has been staged:
+        git diff --staged
+    To see what has been changed BUT NOT STAGED:
+        git diff
+    To undo something that has been staged but not committed:
+        git checkout HEAD path/to/file
+
+    To commit:
+          git commit [will put in editor for commit message]
+      OR
+          git commit -m  "Story 182: Fix benchmarks for speed"
+      (See http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+      for best practices on commit messages.  See below for executive summary.)
+      In the commit message, can use "fixes/resolves/closes #33" to say
+      that it closes issue 33.  Repeat keyword if closing multiple
+      issues: Closes #33 and fixes #21 and resolves #6.
+    If all files to include in a commit are being tracked (i.e., there
+    are files that have been "Changed but not updated" but no files that
+    are untracked), then can wrap the add phase for modified files into
+    the commit:
+        git commit -a -m 'Modify a few files"
+    To "fix" a commit:
+        * Make additional changes that should have been made before commit
+        * git commit --amend [now have single, changed commit]
+
+    To create an annotated tag (e.g., for a new version):
+        git tag -a v1.4 -m 'my version 1.4'
+            [or leave out the -m and Git will launch the editor]
+    To create a signed annotated tag (need a private key):
+        git tag -s v1.5 -m 'my signed 1.5 tag'
+    To push the tags (GitHub Mac application doesn't do this):
+        git push --tags
+
+    (See git-scm book for additional Recording Changes topics, like
+    skipping the staging area, removing files, and moving/renaming
+    files and additional Undoing Things topics, like unstaging and
+    unmodifying files.)
+
+    Executive summary of Tim Pope's (tbaggery) recommendations:
+       Short (<=50 char, preferably) capitalized summary on 1st line followed
+       by blank line; use present tense imperative in summary ('Fix bug' not
+       'Fixed bug'); wrap lines at around 72 chars.
+
+Forking -- Creating your own version of someone else's project:
+    If a GitHub project, use Fork button on GitHub web page.
+	Once you have forked the project, you can clone it to get
+	a local copy.  See section above on Creating a repository.
+
+Creating a branch:
+    To create the branch and switch to it:
+        git branch myBranch
+        git checkout myBranch  [or `git checkout -b myBranch` to do both]
+    To clear the staging area to switch to another branch and then get
+    stashed stuff back:
+        git stash
+        git stash apply   or git stash pop (Understand difference !!!)
+    To switch back and forth between myBranch and the master:
+        git checkout master
+        git checkout myBranch
+    To merge the branch into the master (and then delete the branch):
+        git checkout master
+        git merge myBranch
+        git branch -d myBranch
+
+Looking at branch history/differences:
+    To see the differences between 2 branches:
+        git diff --name-status master..branch   [or branch1..branch2]
+        OR  git diff --stat --color master..branchName
+    To see a history of recent commits (by default in current branch):
+        git log --stat -5  (-5 means last 5 commits, --stat = statistics)
+        git log -p -2  (print diff info for last 2 commits)
+        git log --pretty=oneline
+        git log --pretty=format:"%h - %an, %ar : %s"
+
+Dealing with merge conflicts:
+    Git reports "CONFLICT (content): ...  Automatic merge failed; ..."
+    and `git status` shows what files need to be merged.  The conflicts
+    are marked in the files themselves with diff-like comparisons.  Edit
+    the files to resolve the conflicts in whatever is the best way,
+    removing the diff-like meta-information ("<<<" etc.) at the same
+    time.  Finish by doing a `git add` for each resolved file.
+
+Interacting with a remote:
+    See section above on "Creating a repository" to get started.
+    Updating from the remote:
+        git pull   [repository branch-name]
+            This is equivalent to a fetch & merge:
+                git fetch origin    (fetches into origin/master)
+                git log ..@{u}      (see what the changes are)
+                git merge origin/master
+
+Being the admin:
+    Need lots of stuff here to do with `pull`, `push`, `fetch`, etc.
+    Look at
+    https://github.com/rapid7/metasploit-framework/wiki/Setting-Up-a-Metasploit-Development-Environment#wiki-github
+    and look for Check out the upstream master branch
+    "Rebasing is the easiest way to make sure that your master branch is
+    identical to the upstream master branch. If you have any local
+    changes, those are "rewound," all the remote changes get laid down,
+    and then your changes get reapplied. "
+
+
+  Just taking notes here -- these commands might not be right.
+    To get ramp from the remote site:
+        git://github.com/AlyceBrady/ramp.git
+      https://github.com/AlyceBrady/ramp.git (HTTPS clone)
+    Zip file: https://github.com/AlyceBrady/ramp/archive/master.zip
+
+[Notes to Alyce:
+Need explanation for handling following use case:
+  One branch is current production version, e.g., V 1.2
+  One branch is next set of features, e.g., V 1.3 under development
+  We discover a bug in V 1.2, need to commit a change to that branch
+      and, probably, apply it to current version under development too
+  See
+  http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging
+  to start.
+  
+  Explanation needs to cover when user needs multiple clones vs just
+    multiple environments.  Need different clones when the code is
+    different, not just the data.  E.g., production and test (& demos)
+    can use same code but different data.  A test area for testing bug
+    fixes to current production environment and a staging area for
+    getting used to next version both require different clones (of whole
+    repository :( )  Question: now that Zend has been part of repo, how
+    much space would be saved (if any) by deleting it?  Lots, if one did
+    a --depth=0. Could one then do future git pulls if one has depth=0?
+    Subtle point: once one has tested bug fixes, one wants EXACTLY that
+    version going to production, not including any other bug fixes might
+    have been added since.  git with a particular hash tag?  tar and
+    copy the tested bug fix version and expand as production?
+]
+
+When ready, check out useful Tips and Tricks (bash completion, aliases):
+    http://git-scm.com/book/en/Git-Basics-Tips-and-Tricks
+    Examples of setting up git aliases (could then say "git unstage", e.g.)
+      git config --global alias.revert 'checkout --'  (didn't work?)
+      git config --global alias.unstage 'reset HEAD --'
+      git config --global alias.last 'log -1 HEAD'
+
+
+Sources:
+  http://git-scm.com/book/en/Getting-Started-First-Time-Git-Setup
+  http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository
+  http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository
+  http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+  https://help.github.com/articles/fork-a-repo
+  http://git-scm.com/book/en/Git-Branching-What-a-Branch-Is
+  https://github.com/rapid7/metasploit-framework/wiki/Git-cheatsheet
+    (for git stash)
+  https://github.com/rapid7/metasploit-framework/wiki/Setting-Up-a-Metasploit-Development-Environment#wiki-github

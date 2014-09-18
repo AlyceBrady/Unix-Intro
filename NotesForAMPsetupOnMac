@@ -1,0 +1,99 @@
+
+AMP:
+====
+
+Most of the following can be found at this great page:
+http://coolestguyplanettech.com/downtown/install-and-configure-apache-mysql-php-and-phpmyadmin-osx-108-mountain-lion
+
+Start up http server: sudo apachectl start
+
+Make sure that the /etc/apache2/users directory contains a file
+called abrady.conf, whose contents should be:
+
+<Directory "/Users/abrady/Sites/">
+Options FollowSymLinks Indexes MultiViews
+AllowOverride All
+Order allow,deny
+Allow from all
+</Directory>
+
+In /etc/apache2/httpd.conf, 
+  *  Make sure that AllowOveride within
+     <Directory "/Library/WebServer/Documents"> is All (not None).
+  *  Uncomment LoadModule php5_module libexec/apache2/libphp5.so
+  => Uncomment the Include for httpd-vhosts.conf (not in coolestguy's page)
+
+Download the latest version of mysql:  
+  *  Use mysql -V to see current version
+  => Shut down the current version BEFORE installing next version !!!!
+  *  Download next version (I've done it using macports, but downloaded 5.6
+     from mysql web site as dmg file & then installed that)
+  *  Either setup the new database (set root password using
+     mysqladmin -u root password 'yourpasswordhere', and create accounts
+     and databases as necessary) or copy / import previous data into new db
+     (e.g., cp -pR /usr/local/old-mysql-ver/data /usr/local/mysql/data)
+
+Make sure that php.ini has the following:
+  All:
+    appropriate extension_dir (e.g.,
+        "/usr/lib/php/extensions/no-debug-non-zts-20090626")
+    appropriate zend_extension (e.g.,
+        "/usr/lib/php/extensions/no-debug-non-zts-20090626/xdebug.so")
+  Development machines only:
+    error_reporting = E_ALL | E_STRICT
+    display_errors = On
+    display_startup_errors = On
+    html_errors = On
+  Is pear necessary?  I'm not sure.  Might be needed for phpunit34.
+    If so, install, which will cause include_path in php.ini to be changed.
+  Also had to set short_open_tag to On.  Finally, I set date.timezone to
+    UTC ((local time zone for the server).
+
+
+Ramp/Smart Setup:
+=================
+
+Add the following lines to /etc/hosts:
+
+127.0.0.1       zf-tutorial.localhost
+# 127.0.0.1       ramp.localhost
+127.0.0.1       smart
+127.0.0.1       ramp.development
+127.0.0.1       ramp.demo
+127.0.0.1       smart.demo
+127.0.0.1       exp
+127.0.0.1       njala.development
+
+Update the /etc/apache2/extra/httpd-vhosts.conf file, then do an
+apachectl restart.  Add lines like following:
+
+<VirtualHost *:80>
+   ServerName localhost
+   DocumentRoot "/Library/WebServer/Documents"
+</VirtualHost>
+
+<VirtualHost *:80>
+   ServerName smart
+   DocumentRoot "/Users/abrady/WebApplications/Ramp/public"
+
+   # This should be omitted in the production environment (Really?)
+   SetEnv APPLICATION_ENV production
+
+   <Directory "/Users/abrady/WebApplications/Ramp/public">
+       Options Indexes MultiViews FollowSymLinks
+       AllowOverride All
+       Order allow,deny
+       Allow from all
+   </Directory>
+
+</VirtualHost>
+
+Add other paragraphs like that for ServerName smart, with different
+environments, e.g.,
+   ServerName ramp.development: SetEnv APPLICATION_ENV development
+   ServerName smart.test: SetEnv APPLICATION_ENV testing
+   ServerName ramp.demo: SetEnv APPLICATION_ENV rampdemo
+   ServerName smart.demo: SetEnv APPLICATION_ENV smartdemo
+   ServerName njala.development: SetEnv APPLICATION_ENV njala
+
+Follow directions in Ramp Installation

@@ -1,0 +1,49 @@
+# Linux-specific aliases
+alias ls='ls --color=auto'
+
+# SYSADMIN-type aliases
+
+# Debian-specific
+alias apt-get="sudo apt-get"
+alias update='sudo apt-get update && sudo apt-get upgrade'
+
+# Fedora-specific
+alias update='yum update'
+alias updatey='yum -y update'
+
+# Debian-specific
+if [ $UID -ne 0 ]; then
+    alias a2dissite='sudo a2dissite'
+    alias a2dismod='sudo a2dismod'
+    alias a2ensite='sudo a2ensite'
+    alias a2enmod='sudo a2enmod'
+    alias apachectl='sudo service apache2'
+    alias service='sudo service'
+fi
+
+alias ports='netstat -tulanp'
+
+## pass options to free ## 
+alias meminfo='free -m -l -t'
+
+## get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+
+## get top process eating cpu ##
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+
+## Get server cpu info ##
+alias cpuinfo='lscpu'
+
+## older system use /proc/cpuinfo ##
+## alias cpuinfo='less /proc/cpuinfo' ##
+
+## get GPU ram on desktop / laptop running X ## 
+alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
+
+# top is atop, just like vi is vim
+# But on what system is atop defined?
+# alias top='atop'
+

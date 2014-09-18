@@ -1,0 +1,39 @@
+#
+#  "bash" is the name of your UNIX command interpreter, or "shell".
+#  This file contains bash commands which are run every time a new
+#  shell begins.
+#
+#  The order in which files are executed is:
+#       /etc/profile, which executes
+#       /etc/bash.bashrc
+#       $HOME/.profile, which executes
+#       $HOME/.bashrc
+#
+#  On some systems, the default .bashrc runs .bash_aliases if it
+#  exists.  
+#
+#  If you want to customize some environment variables, you could put
+#  them in ~/.env_vars and then source that from the end of .bashrc.
+#  If you want to define some custom aliases or environment variables
+#  that work under any flavor of *nix, then define them in
+#  ~/.bash_aliases or ~/.env_vars.  If you have some that are specific
+#  to a particular flavor, put them in ~/.bash_aliases-darwin or
+#  ~/.bash_aliases-linux (or .env_vars-darwin, .env_vars-linux).
+#  The .git-completion.bash file comes from the Git source.
+
+OS=$( uname | tr '[:upper:]' '[:lower:]')
+for file in \
+    "$HOME/.bash_aliases" \
+    "$HOME/.env_vars" \
+    "$HOME/.bash_aliases-${OS}" \
+    "$HOME/.env_vars-${OS}" \
+    "$HOME/.git-completion.bash"
+do
+    if [ -f $file ]; then
+        . $file
+    fi
+done
+
+# If you're a die-hard vi user like me:
+# set -o vi
+
