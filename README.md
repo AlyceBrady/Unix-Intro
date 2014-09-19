@@ -2,7 +2,8 @@ Unix-Intro
 ==========
 
 This repository contains several documents and "dot files" that may be
-helpful to people learning Unix / Linux / OS X.
+helpful to people learning Unix / Linux / OS X.  To use the dot files,
+put them in your home directory.
 
 ### Getting Started with Using Unix at the Command Line ("shell")
 
