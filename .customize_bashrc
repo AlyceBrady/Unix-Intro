@@ -1,6 +1,6 @@
 #
 #  "bash" is the name of your UNIX command interpreter, or "shell".
-#  This file contains bash commands which are run every time a new
+#  This file contains bash commands which can be run every time a new
 #  shell begins.
 #
 #  The order in which files are executed is:
@@ -10,12 +10,18 @@
 #       $HOME/.bashrc
 #
 #  On some systems, the default .bashrc runs .bash_aliases if it
-#  exists.  
+#  exists.
 #
-#  If you want to customize some environment variables, you could put
-#  them in ~/.env_vars and then source that from the end of .bashrc.
-#  If you want to define some custom aliases or environment variables
-#  that work under any flavor of *nix, then define them in
+#  If you want to customize environment variables or aliases, you can
+#  add the following lines to your .bashrc file (but uncomment them):
+#    if [ -f .customize_bashrc ]; then
+#       . .customize_bashrc
+#    fi
+#
+#  To customize environment variables, put them in ~/.env_vars and
+#  then make sure you are running either .env_vars or .customize_bashrc
+#  from you .bashrc file.  To define custom aliases or environment
+#  variables that work under any flavor of *nix, then define them in
 #  ~/.bash_aliases or ~/.env_vars.  If you have some that are specific
 #  to a particular flavor, put them in ~/.bash_aliases-darwin or
 #  ~/.bash_aliases-linux (or .env_vars-darwin, .env_vars-linux).
@@ -34,6 +40,6 @@ do
     fi
 done
 
-# If you're a die-hard vi user like me:
+# If you're a die-hard vi user like me, uncomment the following line:
 # set -o vi
 
