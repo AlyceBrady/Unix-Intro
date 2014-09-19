@@ -1,0 +1,280 @@
+<html>
+<head>
+<title>Basic UNIX Commands</title>
+</head>
+<body bgcolor="#ffffff">
+
+<center>
+<h1>Basic UNIX Commands</h1>
+</center>
+
+This file contains a few basic UNIX commands to enable you to create
+directories and files, move around to find specific files, and run a 
+few simple commands.
+
+<p>
+<hr width="100%">
+
+<h2>General</h2>
+
+<ul>
+<dl>
+<dt><code>passwd</code></dt>
+  <dd>change my password (on some systems it is <code>yppasswd</code> or
+	something different, so ask around)
+  </dd>
+<dt><code>man</code></dt>
+  <dd>read the manual page, e.g., 
+<table>
+<tr><td><code>man chmod</code></td>
+  <td>read about the UNIX <code>chmod</code> command</td></tr>
+<tr><td><code>man man</code></td>
+  <td>read about the <code>man</code> command</td></tr>
+<tr><td><code>man fopen</code></td>
+  <td>read about the Standard C library <code>fopen</code> command</td></tr>
+</table>
+  </dd>
+</dl>
+</ul>
+
+<h2>Directories and Files</h2>
+
+<h3>General information about file names</h3>
+<ul>
+<dl>
+<dt>Absolute pathname:</dt>
+  <dd>Fully specifies a directory, starting at the root.
+	For example, <code>/home/www/CS400/index.html</code> is an
+	absolute pathname.
+	Absolute pathnames always start with / (which is
+	the name of the root directory), with one exception:
+	<code>~abrady/ProgLang</code> is an absolute name because the
+	system will expand <code>~abrady</code> to <code>/home/abrady</code>.
+
+<p>
+<dt>Relative pathname:</dt>
+  <dd>the name of a file or directory relative to the current directory;
+  e.g.,
+<table>
+<tr><td width="30%"><code>myfile.c</code></td>
+   <td>file in current directory</td></tr>
+<tr><td><code>progLang/myfile.c</code></td>
+   <td>file in <code>progLang</code> directory, which is a subdirectory
+                         of the current directory</td></tr>
+<tr><td><code>../myfile.c</code></td>
+   <td>file in parent directory (<code>..</code> means directory above
+   current directory)</td></tr>
+<tr><td><code>../progLang/myfile.c</code></td>
+   <td>file in <code>progLang</code> directory, which is at same level
+	in hierarchy as the current directory (it is a child of my
+	parent directory)</td></tr>
+</table>
+</dd>
+</dl>
+</ul>
+
+<h3>Commands for files and directories</h3>
+
+<ul>
+<dl>
+<dt><strong>Moving Around the Directory Hierarchy</strong></dt>
+<dt><code>pwd</code></dt>
+   <dd>show me where I am (print working directory)
+   </dd>
+<dt><code>cd dirname</code></dt>
+   <dd>change to directory <code>dirname</code>, e.g., <code>cd ProgLang</code>
+	or <code>cd ../ProgLang</code>  or <code>cd ~abrady/ProgLang</code>
+   </dd>
+
+<p>
+<dt><strong>Creating and Removing Directories</strong></dt>
+<dt><code>mkdir dirname</code></dt>
+   <dd>make a subdirectory under the current directory; call it
+   <code>dirname</code>
+   </dd>
+<dt><code>rmdir dirname</code></dt>
+   <dd>remove the directory named <code>dirname</code> (must be empty)
+   </dd>
+
+<p>
+<dt><strong>Listing Files in a Directory</strong></dt>
+<dt><code>ls</code></dt>
+   <dd>list the files in the directory
+   </dd>
+<dt><code>ls -aF</code></dt>
+   <dd>better looking listing; lists all files, indicating					directories, executables and links
+   </dd>
+<dt><code>ls *.html *.c</code></dt>
+   <dd>only list files ending in <code>.html</code> or <code>.c</code>
+   </dd>
+
+<p>
+<dt><strong>Moving, Copying, and Removing Files</strong></dt>
+<dt><code>mv oldname newname</code></dt>
+   <dd>rename file <code>oldname</code> to <code>newname</code>
+   </dd>
+<dt><code>mv oldname ProgLang/newname</code></dt>
+   <dd>move file <code>oldname</code> to directory <code>ProgLang</code>,
+				giving it name <code>newname</code>
+   </dd>
+<dt><code>cp oldfile newfile</code></dt>
+   <dd>make a copy of <code>oldfile</code>, calling the copy
+   <code>newfile</code>
+   </dd>
+<dt><code>cp oldfile ProgLang/newfile</code></dt>
+   <dd>make a copy of <code>oldfile</code>; put in the
+   <code>ProgLang</code> directory
+   </dd>
+<dt><code>rm filename</code></dt>
+   <dd>remove filename (does not ask you to confirm this!)
+   </dd>
+<dt><code>rm *</code></dt>
+   <dd>remove all the files in the directory (don't do this!)
+   </dd>
+
+<p>
+<dt><strong>Looking at the Contents of Files</strong></dt>
+<dt><code>cat filename</code></dt>
+   <dd>display filename to the screen (<code>cat</code> = concatenate)
+   </dd>
+<dt><code>cat f1 f2 >f3</code></dt>
+   <dd>concatenate <code>f1</code> and <code>f2</code>, calling combination <code>f3</code>
+   </dd>
+<dt><code>pg filename</code></dt>
+   <dd>display <code>filename</code> to screen one page at a time (use
+				return to go to next page; - to back up)
+   </dd>
+<dt><code>lpr filename</code></dt>
+   <dd>print a file 
+		    (<code>pr filename</code> on some systems)
+   </dd>
+<dt><code>vi filename</code></dt>
+   <dd>edit <code>filename</code> (but learning vi is another lesson!)
+   </dd>
+<dt><code>emacs filename</code></dt>
+   <dd>edit <code>filename</code> (but learning emacs is another lesson!)
+   </dd>
+
+<p>
+<dt><strong>Looking for a Specific Word or Phrase in One or More Files</strong></dt>
+<dt><code>grep string *.c</code></dt>
+   <dd>find which <code>.c</code> files contain <code>string</code>, e.g.,
+   <code>grep fcn3 *.c</code>
+   </dd>
+
+<p>
+<dt><strong>Compiling Programs</strong></dt>
+<dt><code>cc, CC</code></dt>
+   <dd>C and C++ compilers
+   </dd>
+<dt><code>gcc, g++</code></dt>
+   <dd>GNU C and C++ compilers
+   </dd>
+<dt><code>lint</code></dt>
+   <dd>fussy C syntax checker
+   </dd>
+<dt><code>cb</code></dt>
+   <dd>C beautifier (does pretty printing)
+   </dd>
+<dt><code>cflow, dbx, gdb</code></dt>
+   <dd>for C debugging; different ones are available on different
+   systems
+   </dd>
+</dl>
+</ul>
+
+<p>
+<h3>Others that might be useful (see man for details):</h3>
+<ul>
+<dl>
+	<dt><code>chmod</code></dt>  <dd>change the permissions on a file or directory</dd>
+	<dt><code>head</code></dt>  <dd>display the top few lines of a file</dd>
+	<dt><code>tail</code></dt>  <dd>display the last few lines of a file</dd>
+</dl>
+</ul>
+
+
+<h3>Other handy, simple commands:</h3>
+<ul>
+<dl>
+<dt><code>banner word</code></dt>
+   <dd>make a word big
+   </dd>
+<dt><code>cal</code></dt>
+   <dd>show a calendar, e.g., <code>cal 9 1752</code>
+   </dd>
+<dt><code>clear</code></dt>
+   <dd>clear the screen
+   </dd>
+<dt><code>date</code></dt>
+   <dd>show the date and time
+   </dd>
+<dt><code>echo</code></dt>
+   <dd>print to screen, e.g., <code>echo Hi!</code> or <code>echo $PATH</code>
+   </dd>
+<dt><code>exit, logout</code></dt>
+   <dd>exit a UNIX shell, log out of UNIX
+   </dd>
+<dt><code>finger</code></dt>
+   <dd>display info. about users, e.g., 
+				<code>finger abrady@max.cs.kzoo.edu</code>
+			   or	<code>finger Spaulding</code>
+   </dd>
+<dt><code>look</code></dt>
+   <dd>find words in system dictionary, e.g., <code>look viti</code>
+   </dd>
+<dt><code>mail</code></dt>
+   <dd>send or receive email (very old, unsophisticated application)
+   </dd>
+<dt><code>msgs</code></dt>
+   <dd>show system messages
+   </dd>
+<dt><code>wc</code></dt>
+   <dd>word count (also counts lines and characters)
+			   e.g., <code>wc myfile</code> or
+			   <code>wc -l myfile</code>
+   </dd>
+<dt><code>who</code></dt>
+   <dd>who is logged in to the system
+   </dd>
+</dl>
+</ul>
+
+<p>
+<h3>More powerful commands that might be useful (see man for details):</h3>
+<ul>
+<dl>
+<dt><code>grep</code></dt>
+   <dd>look for a pattern in file(s), e.g., <code>grep pat myfile</code>
+   </dd>
+<dt><code>ftp</code></dt>
+   <dd>file transfer protocol
+   </dd>
+<dt><code>ps</code></dt>
+   <dd>show process status of running processes
+   </dd>
+<dt><code>kill</code></dt>
+   <dd>kill a process, e.g., <code>kill -9 14238</code>
+   </dd>
+<dt><code>diff</code></dt>
+   <dd>show differences between two files, e.g., <code>diff old new</code>
+   </dd>
+<dt><code>sort</code></dt>
+   <dd>sort and collate lines of a file
+   </dd>
+<dt><code>spell</code></dt>
+   <dd>spell checker
+   </dd>
+<dt><code>type command</code></dt>
+   <dd>where/what is <code>command</code>? 
+   </dd>
+<dt><code>whereis command</code></dt>
+   <dd>where does this UNIX command live?
+   </dd>
+<dt><code>find</code></dt>
+   <dd>find files by name or other characteristics
+</dl>
+</ul>
+
+</body>
+</html>
