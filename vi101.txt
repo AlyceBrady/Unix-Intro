@@ -1,0 +1,133 @@
+Getting Started with vi
+
+The vi/vim editor is not very difficult to learn (vim stands for "vi
+improved").  The first thing to learn about is the difference between
+insert mode and command mode, described below, and then a basic set
+of simple commands.
+
+The most confusing thing about vi for most people is that there are two
+modes (really three, but the third doesn't create any confusion).  If you
+are in insert mode, then everything you type gets inserted into your
+text. If you type a "w" then a w gets inserted wherever the cursor is.
+Insert mode is not confusing, because it's what you're used to.
+
+When you first vi a file, though, you're not in insert mode yet.  You're
+in command mode.  In command mode, every character is a command.  For
+example, if you type a "w", then the cursor will jump forward to the
+beginning of the next word.  Try it: vi any file (this one, for example)
+and type the letter "w" (without the quotation marks) a number of times.
+
+Now here are two good questions:  how do you get from command mode into
+insert mode (and vice versa), and what if you forget and don't remember
+which mode you're in?  I'll answer the second first: there is a setting
+called "showmode" that will show "INSERT" at the bottom of the
+screen when you are in insert mode.  (Alternatively, it might say
+"INSERT MODE" or "OPEN MODE" or something similar, but these are
+all names for insert mode.)  To turn this setting on, type
+    :set showmode
+and then hit the Enter or Return key.  You won't see "INSERT" at
+the bottom of your screen yet, because you're still in command mode.
+[Notice that from the time you hit the ":" character until you hit
+the Enter/Return key, the cursor jumped down to the bottom of the
+screen.  That is the third, very obvious, mode.]
+
+So back to the first question: how do you get from command mode into
+insert mode (and vice versa)?
+
+The easiest way to get into insert mode from command mode is to type "i."
+This will put you in insert mode, inserting text just before the cursor.
+When you're done inserting text, hit the ESCAPE key to go back to
+command mode.  If you have showmode turned on, you will see the "INSERT"
+indication appear and disappear as you go between modes.  If you don't
+have showmode turned on and you forget which mode you are in, you can
+always just hit the ESCAPE key, at which point you are definitely in
+command mode.
+
+While you're in insert mode, you can use the DELETE or BACKSPACE key
+(depending on your machine) to undo characters you have inserted.
+
+You can stick to "i" to insert text almost all the time, unless you
+happen to want to append some text at the end of the line.  If you
+move the cursor to the end of the line and hit "i" you will be
+inserting text BEFORE the last character in the line, not after it.
+So, you need to know the "a" command, which appends after the cursor.
+(You can use "a" to append after the cursor anywhere in the line,
+not just at the end.)
+
+Moving the cursor is the next basic step.  Most modern versions
+of vi and vim allow you to use the arrow keys in command mode, and
+many even support the arrow keys in insert mode.  Vim even allows
+you to use the mouse.  If you are a fast touch typist and prefer
+to use keys immediately under your fingers on the home row, you can
+also use the following four commands:
+        h       move left
+        j       move down
+        k       move up
+        l       move right
+Notice that h is the left-most and l is the right-most of the four,
+so those two are easy.  The only two that might take some thinking
+before it becomes second nature are the j and k.  (Believe it or
+not, before mice were commonplace these keys were used a lot for
+moving around in game software for people who didn't have joysticks.)
+
+How about deleting text?  The simplest way is just to "x" it out.  In
+command mode, the "x" will delete the character under the cursor.  If
+you want to delete a whole line, type "dd".
+
+What if, by accident, you just made a change you didn't mean to make?
+The undo command is "u".  What if you also want to undo the change
+before that?  In this case, the answer depends on what version of vi/vim
+you are using.  The older vi behavior is to only know about the latest
+change; if you undo again immediately, it undoes the last undo, i.e., it
+redoes it.  Although this is handy -- you can toggle back and forth
+several times deciding whether you like a change or not -- you can't
+undo a previous change.  In vim, on the other hand, you can undo
+multiple changes by typing "u" repeatedly.  If you undo something
+and then change your mind and want to redo it, type control-R.
+
+The last of the most basic tasks is getting out of vi.  The easiest
+thing to do is to type "ZZ".  (Remember to be in command mode first,
+or you'll see "ZZ" in your file.)  This writes the file to disk and
+quits (e.g., Save and Quit).  If you want to do an intermediate
+save without leaving vi, type ":w".  (Remember, that colon introduces
+the third mode at the bottom of the screen.)  If you realize you
+just made lots of changes to the wrong file, or made lots of stupid
+changes because it's been too long since you ate or slept, then
+":q!" means "quit without saving any of my changes, and I really
+mean it!"
+
+There are lots of other vi commands that let you move the cursor
+faster (like "w" which moves the cursor a word at a time), scroll,
+cut and paste, etc., etc.  Some of these are really useful and you
+want to learn them pretty soon or you will go out of your mind with
+frustration.  But you can get started with just the few mentioned
+so far:
+        vi filename     start up vi (if the file doesn't exist it creates it)
+        i               insert text before the cursor (go into insert mode)
+        a               append text after the cursor (go into insert mode)
+        backspace       "un-type" the last character in insert mode
+        ESC             go back to command mode
+        arrow keys      cursor movement (or h/j/k/l)
+        x               delete character under cursor
+        dd              delete entire line cursor is on
+        u               undo the last change (another u or Control-r to
+                            remake the change, depending on version)
+        ZZ              write and quit  (also :wq)
+        :w              intermediate write (does not quit vi)
+        :q              quit (but only works if there are no unsaved changes)
+        :q!             quit, throw away any changes since the last save
+        
+        
+Tip: Do you find showmode useful, but you're tired of typing ":set showmode"
+every time you enter vi?  See if you have a .exrc file (if using vi) or
+.vimrc file (if using vim) in your home directory; if not, you can
+create one.  Put "set showmode" in the file.  Some other useful settings
+are:
+        set autoindent          new lines are automatically indented to
+                                match the previous line
+        set wrapmargin=8        (if you don't like automatic wrapping,
+                                 set it to 0)
+If you are writing code, "set showmatch" can also be very useful; it
+shows matching left and right parentheses, braces, and brackets
+with highlighting or a quick cursor jump in insert mode.
+

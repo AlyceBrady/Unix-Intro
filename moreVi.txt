@@ -1,0 +1,89 @@
+Here are a few more vi tricks that will help you become faster at
+editing files.  Pick out a few at a time to learn and use.
+
+  - J (note capital) "joins" this line and the next, i.e. gets rid of
+        newline between them  -- this is the way to "delete" a newline
+  - Finding text:  use /  -- e.g. /text would find the next occurence of
+        "text" after the cursor (like command-F on a Mac or control-F on 
+        a PC); use ? to search backwards
+        shortcuts: n    finds the "next" occurence of the same thing
+                        in the same direction (like command/control-G)
+                   N    finds the next occurence thing in the
+                        opposite direction
+  - The period repeats the last text-modification command (not cursor
+        movement) at the current cursor position
+                Hint: use with n, for example:
+                        /Alice          find misspelling
+                        cwAlyce<esc>    fix it (see below for cw command)
+                        n               find next Alice
+                        .               change it also
+                        n.n.n.          make the change in three more places
+  - You can "repeat" commands by putting a number in front of them.
+        e.g., 3x would delete 3 characters; 3dd would delete 3 lines.
+  - If you have autoindent turned on in vi, use control-d at the beginning
+        of the line to back out of indentation you don't want.
+        (In vim you can use backspace.)
+  - Other ways to get into insert mode: o will "open" line(s) below the
+        cursor and O (capital o) will open line(s) above the cursor;
+        I (capital i) will start inserting at the beginning of the
+        line and A will append at the end of the line.  (You don't have
+        to move the cursor there separately.)
+  - Copy and paste is "yank" and "put":  3yy will copy 3 lines to the
+        "clipboard" and p will put them below the current line.  Deletion
+        also copies to the "clipboard", so 3dd will delete 3 lines
+        and p will put the 3 deleted lines below the current line.
+        (Obviously you usually want to move the cursor after you do the
+        yy or dd so that you put the copied or deleted text somewhere else.)
+        If you didn't yank or delete full lines (e.g., dw will delete to
+        the end of the word), then p puts text after the cursor in the
+        same line.  P (note capital P!) puts text before the cursor or
+        before the current line, depending on whether the text is only
+        part of a line or whole lines.  Be careful to note that some
+        other commands use the clipboard also, so you shouldn't do
+        anthing between the y/d and the p except move the cursor!!!
+  - Handy cursor movement commands:
+        w       next word (where a word is made up of letters, digits,
+                and underscores - the same things allowed in C variables)
+        W       next white-space-separated word  (e.g., if cursor were
+                on the w in white-space-separated, w would jump to the
+                first hyphen and W would jump to the word "word")
+        b       beginning of this word (or prev. word if cursor is already
+                at beginning of this word)
+        B       beginning of white-space-separated word
+        e       end of word
+        E       end of white-space-separated word (notice a pattern?)
+        + or return     go to first character in next line
+        -       go to first character in prev. line
+        0       go to absolute beginning of this line
+        $       go to end of this line
+  - You can use these (and other) cursor movement commands with the y,
+        d, and c (change/replace) commands, e.g.,
+                3yw     yank (copy) 3 words
+                d$      delete from cursor to end of line
+                ce      change from here to end of word (note: c puts
+                        you in insert mode, so it's ceabc<ESC> if you
+                        want to change it to abc.
+        You can repeat the y, d, and c commands to refer to a whole line:
+                yy      yanks the whole line (even if cursor isn't at the
+                        beginning of the line)
+                3dd     deletes 3 lines
+        Capitalize c and d to mean "from cursor to end of line":
+                C       change from here to end of line
+                D       delete from cursor to end of line
+                Y       different! -- acts like yy
+  - Fast scrolling:
+        1G      move to first line in file
+        nG      move to line n
+        G       move to last line in file
+        ctl-d   scroll down half a window
+        ctl-u   scroll up half a window
+        ctl-f   scroll forward (down) a whole window
+        ctl-b   scroll back (up) a whole window
+        H       jump cursor to first line showing in window ("home" line)
+        M       jump cursor to "middle" line showing in window
+        L       jump cursor to "last" line showing in window
+  - Seeing more context:
+        ctl-e   show one more line at bottom of window without moving cursor
+        ctl-y   show one more line at top of window without moving cursor
+
+
