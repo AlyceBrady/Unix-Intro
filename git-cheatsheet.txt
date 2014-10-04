@@ -99,9 +99,9 @@ Recording changes:
     To stage files (new or modified) for commit:
         git add <file>
     To see what has been staged:
-        git diff --staged
+        git diff --staged [filename]
     To see what has been changed BUT NOT STAGED:
-        git diff
+        git diff [filename]
     To undo something that has been staged but not committed:
         git checkout HEAD path/to/file
 
