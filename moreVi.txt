@@ -85,5 +85,28 @@ editing files.  Pick out a few at a time to learn and use.
   - Seeing more context:
         ctl-e   show one more line at bottom of window without moving cursor
         ctl-y   show one more line at top of window without moving cursor
+  - Editing multiple documents:
+        You can switch to a different document without leaving vi by saving
+        your changes and then typing
+            :e otherFileName
+        When your done making changes to that document, you can save
+        your changes and go to yet another document, or go back to the
+        previous document by typing
+            :e#
+        One advantage to using :e rather than leaving vi and then
+        entering it again with the other document is that search (n),
+        redo (.), and the clipboard keep their values across documents.
+        In other words, you can do multiple searches and replaces across
+        documents or a yank from one document and a put in another.
+
+        You can also edit multiple documents to begin with (e.g., vi
+        file1 file2 file3) and go from one to the next with :n.  If you
+        type :n when you're at the last file, you'll get a message that
+        there aren't more files; you can wrap back around to the first
+        file in the list with :rewind (or :rew for short).  The :args
+        command will show you the list of files you are editing.  Again,
+        the search (n), redo (.), and clipboard keep their values across
+        documents.
+    
 
 
