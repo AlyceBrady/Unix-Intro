@@ -8,6 +8,8 @@ Three alternatives to getting the manual page (manpage) for any Git command:
 
 General setup recommendation:
     git config --global color.ui true   [turns on color for git statements]
+        [This and other git config --global commands only have to be
+        done once.]
 
 Updating Git:
 
@@ -26,10 +28,10 @@ Downloading a Read-Only Application:
     How about this suggestion: git clone --depth=0  ???
 
 Creating a repository:
-    For an existing project:
+    For an existing project (i.e., existing code not in git):
         * Go to the project's directory
         * git init  [then do `add`s and `commit`]
-    For an existing repository:
+    For an existing repository (on own machine, github, wherever):
           git clone git://github.com/schacon/grit.git  [or whatever]
       OR
           git clone git://github.com/schacon/grit.git mygrit [new name]
@@ -37,11 +39,57 @@ Creating a repository:
         * Use Fork button on GitHub web page. [now have own copy on GitHub]
         * git clone git://github.com/myUserName/ramp.git [or whatever]
 
+Forking -- Creating your own version of someone else's project:
+    If a GitHub project, use Fork button on GitHub web page.
+	Once you have forked the project, you can clone it to get
+	a local copy.  See section above on Creating a repository.
+
+Interacting with a remote:
+    See section above on "Creating a repository" to get started.
+    Updating from the remote:
+        git pull   [repository branch-name]
+            This is equivalent to a fetch & merge:
+                git fetch origin    (fetches into origin/master)
+                git log ..@{u}      (see what the changes are)
+                git merge origin/master
+    Updating to the remote (if you're owner or a collaborator) after
+    recording and committing changes (see below) locally:
+        git push   [repository branch-name]
+
+Creating a branch:
+    To create the branch and switch to it:
+        git branch myBranch
+        git checkout myBranch  [or `git checkout -b myBranch` to do both]
+    To clear the staging area to switch to another branch and then get
+    stashed stuff back:
+        git stash
+        git stash apply   or git stash pop (Understand difference !!!)
+    To switch back and forth between myBranch and the master:
+        git checkout master
+        git checkout myBranch
+    To merge the branch into the master (and then delete the branch):
+        git checkout master
+        git merge myBranch
+        git branch -d myBranch
+
+Looking at branch history/differences:
+    To see the differences between 2 branches:
+        git diff --name-status master..branch   [or branch1..branch2]
+        OR  git diff --stat --color master..branchName
+    To see a history of recent commits (by default in current branch):
+        git log --stat -5  (-5 means last 5 commits, --stat = statistics)
+        git log -p -2  (print diff info for last 2 commits)
+        git log --pretty=oneline
+        git log --pretty=format:"%h - %an, %ar : %s"
+
+Editing files:  Do this in the normal way.  Then record changes as below.
+
 Renaming files:  Do this using Git, not the UNIX `mv` command!
     To rename or move a file:
         git mv filename newFilename
     If the file has been moved outside of Git, just do a `git rm` and
     `git add`; Git figures out this this is a rename (according to SCM):
+        mv README.txt README   [oops! forgot to use git mv!]
         git rm README.txt
         git add README
 
@@ -93,37 +141,6 @@ Recording changes:
        by blank line; use present tense imperative in summary ('Fix bug' not
        'Fixed bug'); wrap lines at around 72 chars.
 
-Forking -- Creating your own version of someone else's project:
-    If a GitHub project, use Fork button on GitHub web page.
-	Once you have forked the project, you can clone it to get
-	a local copy.  See section above on Creating a repository.
-
-Creating a branch:
-    To create the branch and switch to it:
-        git branch myBranch
-        git checkout myBranch  [or `git checkout -b myBranch` to do both]
-    To clear the staging area to switch to another branch and then get
-    stashed stuff back:
-        git stash
-        git stash apply   or git stash pop (Understand difference !!!)
-    To switch back and forth between myBranch and the master:
-        git checkout master
-        git checkout myBranch
-    To merge the branch into the master (and then delete the branch):
-        git checkout master
-        git merge myBranch
-        git branch -d myBranch
-
-Looking at branch history/differences:
-    To see the differences between 2 branches:
-        git diff --name-status master..branch   [or branch1..branch2]
-        OR  git diff --stat --color master..branchName
-    To see a history of recent commits (by default in current branch):
-        git log --stat -5  (-5 means last 5 commits, --stat = statistics)
-        git log -p -2  (print diff info for last 2 commits)
-        git log --pretty=oneline
-        git log --pretty=format:"%h - %an, %ar : %s"
-
 Dealing with merge conflicts:
     Git reports "CONFLICT (content): ...  Automatic merge failed; ..."
     and `git status` shows what files need to be merged.  The conflicts
@@ -131,15 +148,6 @@ Dealing with merge conflicts:
     the files to resolve the conflicts in whatever is the best way,
     removing the diff-like meta-information ("<<<" etc.) at the same
     time.  Finish by doing a `git add` for each resolved file.
-
-Interacting with a remote:
-    See section above on "Creating a repository" to get started.
-    Updating from the remote:
-        git pull   [repository branch-name]
-            This is equivalent to a fetch & merge:
-                git fetch origin    (fetches into origin/master)
-                git log ..@{u}      (see what the changes are)
-                git merge origin/master
 
 Being the admin:
     Need lots of stuff here to do with `pull`, `push`, `fetch`, etc.
@@ -169,7 +177,7 @@ Need explanation for handling following use case:
   to start.
   
   Explanation needs to cover when user needs multiple clones vs just
-    multiple environments.  Need different clones when the code is
+    multiple environments.  Need different code clones when the code is
     different, not just the data.  E.g., production and test (& demos)
     can use same code but different data.  A test area for testing bug
     fixes to current production environment and a staging area for
@@ -178,9 +186,13 @@ Need explanation for handling following use case:
     much space would be saved (if any) by deleting it?  Lots, if one did
     a --depth=0. Could one then do future git pulls if one has depth=0?
     Subtle point: once one has tested bug fixes, one wants EXACTLY that
-    version going to production, not including any other bug fixes might
-    have been added since.  git with a particular hash tag?  tar and
+    version going to production, not including any other bug fixes that
+    might have been added since.  git with a particular hash tag?  tar and
     copy the tested bug fix version and expand as production?
+    Further note to Alyce: "clones" above refer to git clones, not
+    database clones.  There might be production and test environments
+    using different code clones; the test environment might also be
+    using a clone of the database as of a particular date.
 ]
 
 When ready, check out useful Tips and Tricks (bash completion, aliases):
