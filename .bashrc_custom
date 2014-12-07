@@ -1,26 +1,14 @@
+# ~/.bashrc_custom: if executed by bash, reads in customized aliases and
+#                   environment variables
 #
-#  "bash" is the name of your UNIX command interpreter, or "shell".
-#  This file contains bash commands which can be run every time a new
-#  shell begins.
-#
-#  The order in which files are executed is:
-#       /etc/profile, which executes
-#       /etc/bash.bashrc
-#       $HOME/.profile, which executes
-#       $HOME/.bashrc
-#
-#  On some systems, the default .bashrc runs .bash_aliases if it
-#  exists.
-#
-#  If you want to customize environment variables or aliases, you can
-#  add the following lines to your .bashrc file (but uncomment them):
-#    if [ -f .customize_bashrc ]; then
-#       . .customize_bashrc
-#    fi
+# To execute automatically every time you start a new interactive shell,
+# run the customize_bashrc script, which will update your .bashrc file.
+# You need only do this once.  Then re-execute your .bashrc file:
+#    source ~/.bashrc
 #
 #  To customize environment variables, put them in ~/.env_vars and
 #  then make sure you are running either .env_vars or .customize_bashrc
-#  from you .bashrc file.  To define custom aliases or environment
+#  from your .bashrc file.  To define custom aliases or environment
 #  variables that work under any flavor of *nix, then define them in
 #  ~/.bash_aliases or ~/.env_vars.  If you have some that are specific
 #  to a particular flavor, put them in ~/.bash_aliases-darwin or

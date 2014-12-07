@@ -13,15 +13,11 @@ put them in your home directory.
 
 ### Useful dot files that set aliases and environment variables
 
-- [.customize_bashrc](#customize_bashrc) : A script that executes the
-  other dot files in this list.  One way to run this every time you
-  start a new interactive shell is to add the following to the bottom
-  of your `.bashrc` file
-<pre>
-    if [ -f ~/.customize_bashrc ]; then
-        . ~/.customize_bashrc
-    fi
-</pre>
+- [.bashrc_custom](#bashrc_custom) : A script that executes the
+  other dot files in this list.  If you want this to run every time you
+  start a new interactive shell, put it in your home directory and then
+  run the [customize_bashrc](#customize_bashrc) script.  (You need only
+  do this once.)  
 
 - [.bash_aliases](#bash_aliases) : Aliases (pseudo-commands or shortcuts)
 
@@ -78,17 +74,18 @@ keep track of your files and work on programming projects.
 - [NotesForAMPsetupOnMac](#NotesForAMPsetupOnMac) : Notes on setting up
   AMP on a Mac
 
-[basicBash]: basicBash.md
-[basicUNIX]: basicUNIX.html
-[customize_bashrc]: .customize_bashrc
+[bashrc_custom]: .bashrc_custom
 [bash_aliases]: .bash_aliases
 [bash_aliases-darwin]: .bash_aliases-darwin
 [bash_aliases-linux]: .bash_aliases-linux
 [env_vars]: .env_vars
-[basicVI]: basicVI.html
 [vimrc]: .vimrc
-[Git_SettingUp]: Git_SettingUp
+[basicBash]: basicBash.md
+[basicUNIX]: basicUNIX.html
+[customize_bashrc]: customize_bashrc
+[basicVI]: basicVI.html
 [git-cheatsheet]: .git-cheatsheet.txt
+[Git_SettingUp]: Git_SettingUp
 [my.cnf]: .my.cnf
 [root.my.cnf]: root.my.cnf
 [NotesForAMPsetupOnMac]: NotesForAMPsetupOnMac

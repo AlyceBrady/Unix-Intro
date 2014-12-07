@@ -1,0 +1,13 @@
+# customize_bashrc: adds three lines to the end of the user's .bashrc
+#                   file that will cause .bashrc_custom to be executed
+#                   automatically as part of the execution of .bashrc
+#       ASSUMPTION: .bashrc_custom is in the user's home directory
+#
+#  On some systems, the default .bashrc runs .bash_aliases if it
+#  exists.
+#
+cat >> ~/.bashrc <<EOF
+if [ -f ~/.bashrc_custom ]; then
+    . ~/.bashrc_custom
+fi
+EOF
