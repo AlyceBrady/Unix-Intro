@@ -9,7 +9,8 @@ The most confusing thing about vi for most people is that there are two
 modes (really three, but the third doesn't create any confusion).  If you
 are in insert mode, then everything you type gets inserted into your
 text. If you type a "w" then a w gets inserted wherever the cursor is.
-Insert mode is not confusing, because it's what you're used to.
+Insert mode is usually not confusing, because it's what most people are
+used to.
 
 When you first vi a file, though, you're not in insert mode yet.  You're
 in command mode.  In command mode, every character is a command.  For
@@ -19,29 +20,24 @@ and type the letter "w" (without the quotation marks) a number of times.
 
 Now here are two good questions:  how do you get from command mode into
 insert mode (and vice versa), and what if you forget and don't remember
-which mode you're in?  I'll answer the second first: there is a setting
-called "showmode" that will show "INSERT" at the bottom of the
-screen when you are in insert mode.  (Alternatively, it might say
-"INSERT MODE" or "OPEN MODE" or something similar, but these are
-all names for insert mode.)  To turn this setting on, type
-    :set showmode
-and then hit the Enter or Return key.  You won't see "INSERT" at
-the bottom of your screen yet, because you're still in command mode.
-[Notice that from the time you hit the ":" character until you hit
-the Enter/Return key, the cursor jumped down to the bottom of the
-screen.  That is the third, very obvious, mode.]
+which mode you're in?
 
-So back to the first question: how do you get from command mode into
-insert mode (and vice versa)?
-
-The easiest way to get into insert mode from command mode is to type "i."
+The easiest way to get into insert mode from command mode is to type "i".
 This will put you in insert mode, inserting text just before the cursor.
 When you're done inserting text, hit the ESCAPE key to go back to
-command mode.  If you have showmode turned on, you will see the "INSERT"
+command mode.  There is an optional setting called "showmode" which
+indicates at the bottom of the screen when you are in insert mode.
+If you have this setting turned on, you will see an "INSERT" or "OPEN"
 indication appear and disappear as you go between modes.  If you don't
 have showmode turned on and you forget which mode you are in, you can
 always just hit the ESCAPE key, at which point you are definitely in
-command mode.
+command mode.  To turn on showmode, type
+    :set showmode
+and then hit the Enter or Return key.  Then type an "i" and the ESCAPE
+key to see the insert mode indicator come and go.
+[Notice that from the time you hit the ":" character until you hit
+the Enter/Return key, the cursor jumped down to the bottom of the
+screen.  That is the third, very obvious, mode.]
 
 While you're in insert mode, you can use the DELETE or BACKSPACE key
 (depending on your machine) to undo characters you have inserted.
