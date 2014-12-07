@@ -31,6 +31,9 @@ Creating a repository:
     For an existing project (i.e., existing code not in git):
         * Go to the project's directory
         * git init  [then do `add`s and `commit`]
+    To push a newly created local repository to a remote:
+        git remote add origin https://github.com/AlyceBrady/name-it.git
+        git push -u origin master 
     For an existing repository (on own machine, github, wherever):
           git clone git://github.com/schacon/grit.git  [or whatever]
       OR
@@ -57,7 +60,9 @@ Interacting with a remote:
         git push   [repository branch-name]
 
 Creating a branch:
-    To create the branch and switch to it:
+    To see what branches you have:
+        git branch
+    To create a branch and switch to it:
         git branch myBranch
         git checkout myBranch  [or `git checkout -b myBranch` to do both]
     To clear the staging area to switch to another branch and then get
