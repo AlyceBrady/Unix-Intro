@@ -9,7 +9,7 @@ alias .3='cd ../../..'
 alias back='cd "$OLDPWD"'
 alias dirt='ls -aFR'
 alias grep='grep --color=auto'
-alias l='ls -aF'
+alias l='ls -aFU'
 alias p='pwd'
 alias recent="ls -alt | head"
 alias wcl='wc -l'
