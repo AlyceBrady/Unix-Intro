@@ -1,5 +1,8 @@
 # Linux-specific aliases
 alias ls='ls --color=auto'
+# alias ls='LC_ALL=C ls --color=auto'
+#   (LC_ALL=C invokes the traditional POSIX sorting order)
+alias l='ls -aF'
 
 # SYSADMIN-type aliases
 
