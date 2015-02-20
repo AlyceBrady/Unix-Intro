@@ -67,7 +67,7 @@ keep track of your files and work on programming projects.
 
 - [.my.cnf](#my.cnf) : Template for a `.my.cnf` file
 
-- [root.my.cnf](#root.my.cnf) : Template for a `root.my.cnf` file
+- [.root.cnf](#root.cnf) : Template for a `.root.cnf` file
 
 ### Instructions for setting up Apache/Mysql/Php (AMP)
 
@@ -87,6 +87,6 @@ keep track of your files and work on programming projects.
 [git-cheatsheet]: .git-cheatsheet.txt
 [Git_SettingUp]: Git_SettingUp
 [my.cnf]: .my.cnf
-[root.my.cnf]: root.my.cnf
+[root.cnf]: .root.cnf
 [NotesForAMPsetupOnMac]: NotesForAMPsetupOnMac
 
