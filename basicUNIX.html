@@ -48,6 +48,8 @@ few simple commands.
 	absolute pathname.
 	Absolute pathnames always start with / (which is
 	the name of the root directory), with one exception:
+        a tilde in front of a username represents the absolute pathname
+        of that user's home directory.  For example,
 	<code>~abrady/ProgLang</code> is an absolute name because the
 	system will expand <code>~abrady</code> to <code>/home/abrady</code>.
 
@@ -99,10 +101,13 @@ few simple commands.
 <p>
 <dt><strong>Listing Files in a Directory</strong></dt>
 <dt><code>ls</code></dt>
-   <dd>list the files in the directory
+   <dd>list the files in the directory  (does not include files whose
+   names start with a dot, e.g., <code>.profile</code>, which are also
+   known as <em>hidden</em> files)
    </dd>
 <dt><code>ls -aF</code></dt>
-   <dd>better looking listing; lists all files, indicating					directories, executables and links
+   <dd>better looking listing; lists all files (including dot files),
+        indicating directories, executables and links
    </dd>
 <dt><code>ls *.html *.c</code></dt>
    <dd>only list files ending in <code>.html</code> or <code>.c</code>
@@ -140,9 +145,9 @@ few simple commands.
 <dt><code>cat f1 f2 >f3</code></dt>
    <dd>concatenate <code>f1</code> and <code>f2</code>, calling combination <code>f3</code>
    </dd>
-<dt><code>pg filename</code></dt>
+<dt><code>more filename</code></dt>
    <dd>display <code>filename</code> to screen one page at a time (use
-				return to go to next page; - to back up)
+   spacebar to go to next page; <code>b</code> to back up)
    </dd>
 <dt><code>lpr filename</code></dt>
    <dd>print a file 
@@ -170,21 +175,29 @@ few simple commands.
 <dt><code>gcc, g++</code></dt>
    <dd>GNU C and C++ compilers
    </dd>
-<dt><code>lint</code></dt>
-   <dd>fussy C syntax checker
+<dt><code>gcc -Wall -Wextra -Wpedantic -Wformat -Wshadow
+    -Wredundant-decls -Wstrict-prototypes</code></dt>
+<dd>The <code>-W</code> options generate warnings about questionable
+constructions; these sometimes indicate programmer confusion or actual
+logic errors.  (You can also use <code>-Wtraditional</code> to catch
+some non-traditional C constructs that GCC allows, or
+<code>-Wmissing-prototypes</code> to find functions that do not have
+prototypes in header files.)
    </dd>
+<!--
 <dt><code>cb</code></dt>
    <dd>C beautifier (does pretty printing)
    </dd>
+-->
 <dt><code>cflow, dbx, gdb</code></dt>
-   <dd>for C debugging; different ones are available on different
+   <dd>for C debugging; different debuggers have been available on different
    systems
    </dd>
 </dl>
 </ul>
 
 <p>
-<h3>Others that might be useful (see man for details):</h3>
+<h3>Others that might be useful (see <code>man</code> page for details):</h3>
 <ul>
 <dl>
 	<dt><code>chmod</code></dt>  <dd>change the permissions on a file or directory</dd>
@@ -215,6 +228,7 @@ few simple commands.
 <dt><code>exit, logout</code></dt>
    <dd>exit a UNIX shell, log out of UNIX
    </dd>
+<!--
 <dt><code>finger</code></dt>
    <dd>display info. about users, e.g., 
 				<code>finger abrady@max.cs.kzoo.edu</code>
@@ -223,12 +237,16 @@ few simple commands.
 <dt><code>look</code></dt>
    <dd>find words in system dictionary, e.g., <code>look viti</code>
    </dd>
+<dt><code>spell</code></dt>
+   <dd>spell checker
+   </dd>
 <dt><code>mail</code></dt>
    <dd>send or receive email (very old, unsophisticated application)
    </dd>
 <dt><code>msgs</code></dt>
    <dd>show system messages
    </dd>
+-->
 <dt><code>wc</code></dt>
    <dd>word count (also counts lines and characters)
 			   e.g., <code>wc myfile</code> or
@@ -241,20 +259,19 @@ few simple commands.
 </ul>
 
 <p>
-<h3>More powerful commands that might be useful (see man for details):</h3>
+<h3>More powerful commands that might be useful (see <code>man</code>
+page for details):</h3>
 <ul>
 <dl>
+<dt><code>type command</code></dt>
+   <dd>where/what is <code>command</code>?  (could be a command or an
+   alias)  e.g., <code>type diff</code> or <code>type l</code>
+   </dd>
+<dt><code>whereis command</code></dt>
+   <dd>where does this UNIX command live?  e.g., <code>whereis man</code>
+   </dd>
 <dt><code>grep</code></dt>
    <dd>look for a pattern in file(s), e.g., <code>grep pat myfile</code>
-   </dd>
-<dt><code>ftp</code></dt>
-   <dd>file transfer protocol
-   </dd>
-<dt><code>ps</code></dt>
-   <dd>show process status of running processes
-   </dd>
-<dt><code>kill</code></dt>
-   <dd>kill a process, e.g., <code>kill -9 14238</code>
    </dd>
 <dt><code>diff</code></dt>
    <dd>show differences between two files, e.g., <code>diff old new</code>
@@ -262,17 +279,23 @@ few simple commands.
 <dt><code>sort</code></dt>
    <dd>sort and collate lines of a file
    </dd>
-<dt><code>spell</code></dt>
-   <dd>spell checker
-   </dd>
-<dt><code>type command</code></dt>
-   <dd>where/what is <code>command</code>? 
-   </dd>
-<dt><code>whereis command</code></dt>
-   <dd>where does this UNIX command live?
-   </dd>
 <dt><code>find</code></dt>
    <dd>find files by name or other characteristics
+<dt><code>ftp</code></dt>
+   <dd>file transfer protocol
+   </dd>
+<dt><code>ssh</code></dt>
+   <dd>remote login (secure shell)
+   </dd>
+<dt><code>scp</code></dt>
+   <dd>secure copy (remote file copy); uses <code>ssh</code>
+   </dd>
+<dt><code>ps</code></dt>
+   <dd>show process status of running processes
+   </dd>
+<dt><code>kill</code></dt>
+   <dd>kill a process, e.g., <code>kill -9 14238</code>
+   </dd>
 </dl>
 </ul>
 

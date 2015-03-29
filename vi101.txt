@@ -26,12 +26,12 @@ The easiest way to get into insert mode from command mode is to type "i".
 This will put you in insert mode, inserting text just before the cursor.
 When you're done inserting text, hit the ESCAPE key to go back to
 command mode.  There is an optional setting called "showmode" which
-indicates at the bottom of the screen when you are in insert mode.
-If you have this setting turned on, you will see an "INSERT" or "OPEN"
-indication appear and disappear as you go between modes.  If you don't
-have showmode turned on and you forget which mode you are in, you can
-always just hit the ESCAPE key, at which point you are definitely in
-command mode.  To turn on showmode, type
+indicates when you are in insert mode.  If you have this setting
+turned on, you will see an "INSERT" or "OPEN" indication appear and
+disappear at the bottom of the screen as you go between modes.  If
+you don't have showmode turned on and you forget which mode you are
+in, you can always just hit the ESCAPE key, at which point you are
+definitely in command mode.  To turn on showmode, type
     :set showmode
 and then hit the Enter or Return key.  Then type an "i" and the ESCAPE
 key to see the insert mode indicator come and go.
