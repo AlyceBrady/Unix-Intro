@@ -38,9 +38,19 @@ Creating a repository:
           git clone git://github.com/schacon/grit.git  [or whatever]
       OR
           git clone git://github.com/schacon/grit.git mygrit [new name]
+      OR (if ssh git server)
+          git clone username@server.school.edu:/directoryPath/grit.git
     If not a collaborator for the original repository, fork it first:
         * Use Fork button on GitHub web page. [now have own copy on GitHub]
         * git clone git://github.com/myUserName/ramp.git [or whatever]
+    Creating a shared repository from an existing repository:
+        Create a bare version of the repository:
+            * Go the directory above the project's directory
+            * Create a bare clone called projectName.git, e.g.,
+                git clone --bare cs230 ../gitBase/cs230.git
+            * Go to the new bare clone directory and share it, e.g.,
+                cd ../gitBase/cs230.git
+                git init --bare --shared
 
 Forking -- Creating your own version of someone else's project:
     If a GitHub project, use Fork button on GitHub web page.
@@ -218,3 +228,4 @@ Sources:
   https://github.com/rapid7/metasploit-framework/wiki/Git-cheatsheet
     (for git stash)
   https://github.com/rapid7/metasploit-framework/wiki/Setting-Up-a-Metasploit-Development-Environment#wiki-github
+  https://www.kernel.org/pub/software/scm/git/docs/gittutorial.html

@@ -89,7 +89,7 @@ editing files.  Pick out a few at a time to learn and use.
         You can switch to a different document without leaving vi by saving
         your changes and then typing
             :e otherFileName
-        When your done making changes to that document, you can save
+        When you're done making changes to that document, you can save
         your changes and go to yet another document, or go back to the
         previous document by typing
             :e#
