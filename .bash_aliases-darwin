@@ -2,4 +2,5 @@
 alias apache2ctl='sudo /usr/sbin/apachectl'
 alias httpd.conf='sudo vi /etc/apache2/httpd.conf'
 alias vhosts='sudo vi /etc/apache2/extra/httpd-vhosts.conf'
+alias ls="ls -FGh"
 
