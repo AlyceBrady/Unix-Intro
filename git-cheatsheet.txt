@@ -96,6 +96,7 @@ Looking at branch history/differences:
         git log -p -2  (print diff info for last 2 commits)
         git log --pretty=oneline
         git log --pretty=format:"%h - %an, %ar : %s"
+        git log -10 --pretty=format:"%h - %an, %ar : %s"
 
 Editing files:  Do this in the normal way.  Then record changes as below.
 
@@ -143,8 +144,17 @@ Recording changes:
             [or leave out the -m and Git will launch the editor]
     To create a signed annotated tag (need a private key):
         git tag -s v1.5 -m 'my signed 1.5 tag'
+    To see basic info about tag and its commit: git show tagName | head
     To push the tags (GitHub Mac application doesn't do this):
         git push --tags
+    To see the list of tags:  git tag  or git tag -l <pattern>
+       or git for-each-ref --sort='*authordate' --format='%(tag)' refs/tags
+    To remove a tag:  git tag -d S99
+    To set a tag after the fact:
+       See a list of commits (need commit checksum):
+         git log --pretty=format:"%h - %an, %ar : %s"  (or --pretty=oneline)
+       Set tag by providing part of checksum (e.g., first 8 chars):
+         git tag -a v1.4 -m 'my version 1.4' c4ec7503
 
     (See git-scm book for additional Recording Changes topics, like
     skipping the staging area, removing files, and moving/renaming
