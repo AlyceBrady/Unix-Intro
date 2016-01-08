@@ -97,6 +97,8 @@ Looking at branch history/differences:
         git log --pretty=oneline
         git log --pretty=format:"%h - %an, %ar : %s"
         git log -10 --pretty=format:"%h - %an, %ar : %s"
+    To see a history of branches and commits:
+        git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset'
 
 Editing files:  Do this in the normal way.  Then record changes as below.
 

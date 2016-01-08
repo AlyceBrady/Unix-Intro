@@ -40,7 +40,7 @@ Some of the most useful aliases in `.bash_aliases` are:
     dirt        list contents of directory & its subdirectories
     l           list all files in directory; indicate directories
                   with a trailing slash, executables with a trailing
-                  asteris, and symbolic links with a trailing `@`
+                  asterisk, and symbolic links with a trailing `@`
     recent      show most recently changed files in this directory
                   (useful to know which files have to be recompiled)
 
