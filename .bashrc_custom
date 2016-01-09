@@ -1,26 +1,28 @@
 # ~/.bashrc_custom: if executed by bash, reads in customized aliases and
 #                   environment variables
 #
-# To execute automatically every time you start a new interactive shell,
-# run the customize_bashrc script, which will update your .bashrc file.
-# You need only do this once.  Then re-execute your .bashrc file:
-#    source ~/.bashrc
+# USAGE:  add the following lines to the bottom of your .bashrc file:
+#   if [ -f $HOME/.bashrc_custom ]; then
+#       . $HOME/.bashrc_custom;
+#   fi
 #
-#  To customize environment variables, put them in ~/.env_vars and
-#  then make sure you are running either .env_vars or .customize_bashrc
-#  from your .bashrc file.  To define custom aliases or environment
-#  variables that work under any flavor of *nix, then define them in
-#  ~/.bash_aliases or ~/.env_vars.  If you have some that are specific
+#  To define custom aliases or environment variables that work under
+#  any flavor of *nix, define them in ~/.bash_aliases or ~/.env_vars,
+#  then make sure you are executing them or this file from your .bashrc.
+#  If you have some aliases or environment variables that are specific
 #  to a particular flavor, put them in ~/.bash_aliases-darwin or
 #  ~/.bash_aliases-linux (or .env_vars-darwin, .env_vars-linux).
 #  The .git-completion.bash file comes from the Git source.
 
 OS=$( uname | tr '[:upper:]' '[:lower:]')
 for file in \
+    "$HOME/.bashrc-${USER}" \
     "$HOME/.bash_aliases" \
-    "$HOME/.env_vars" \
     "$HOME/.bash_aliases-${OS}" \
+    "$HOME/.bash_aliases-${USER}" \
+    "$HOME/.env_vars" \
     "$HOME/.env_vars-${OS}" \
+    "$HOME/.env_vars-${USER}" \
     "$HOME/.git-completion.bash"
 do
     if [ -f $file ]; then
@@ -28,6 +30,10 @@ do
     fi
 done
 
-# If you're a die-hard vi user like me, uncomment the following line:
+# Uncomment line below if you want users in your group to have
+# read/write permissions on your files.
+# umask 002
+
+# If you're a die-hard vi user, uncomment the following line:
 # set -o vi
 

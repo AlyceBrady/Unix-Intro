@@ -6,23 +6,27 @@ alias l='ls -aF'
 
 # SYSADMIN-type aliases
 
-# Debian-specific
-alias apt-get="sudo apt-get"
-alias update='sudo apt-get update && sudo apt-get upgrade'
-
-# Fedora-specific
-alias update='yum update'
-alias updatey='yum -y update'
-
-# Debian-specific
-if [ $UID -ne 0 ]; then
-    alias a2dissite='sudo a2dissite'
-    alias a2dismod='sudo a2dismod'
-    alias a2ensite='sudo a2ensite'
-    alias a2enmod='sudo a2enmod'
-    alias apachectl='sudo service apache2'
-    alias service='sudo service'
-fi
+# Distribution-specific aliases for updating software and managing
+# apache services
+case $(lsb_release -i | awk ‘{ print $3 }’) in
+Ubuntu|Debian)
+    alias apt-get=”sudo apt-get”
+    alias updatey=”sudo apt-get –yes”
+    alias update=’sudo apt-get update && sudo apt-get upgrade’
+    if [ $UID -ne 0 ]; then
+        alias a2dissite='sudo a2dissite'
+        alias a2dismod='sudo a2dismod'
+        alias a2ensite='sudo a2ensite'
+        alias a2enmod='sudo a2enmod'
+        alias apachectl='sudo service apache2'
+        alias service='sudo service'
+    fi
+    ;;
+CentOS|RedHatEnterpriseServer)
+    alias update=’yum update’
+    alias updatey=’yum -y update’
+    ;;
+esac
 
 alias ports='netstat -tulanp'
 
@@ -47,6 +51,6 @@ alias cpuinfo='lscpu'
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 
 # top is atop, just like vi is vim
-# But on what system is atop defined?
+# But on what system is atop defined?  (not on a pi, for example)
 # alias top='atop'
 

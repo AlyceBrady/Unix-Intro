@@ -10,6 +10,7 @@ alias back='cd "$OLDPWD"'
 alias dirt='ls -aFR'
 alias grep='grep --color=auto'
 alias l='ls -aF'
+alias ll='ls -ahlF'
 alias p='pwd'
 alias recent="ls -alt | head"
 alias wcl='wc -l'
@@ -28,14 +29,11 @@ alias a='alias'
 alias bye='clear; exit'
 alias functions='set | grep "=()" | cut -f1 -d='
 alias mysqlAsRoot="mysql --defaults-file=~/.root.cnf"
-alias now='date +"%T'
+alias now='date +"%T"'
 alias nowdate='date +"%d-%m-%Y"'
 alias psg='ps -ef | grep'
 #show only my procs
 alias psme='ps -ef | grep $USER'
-
-# Assumes phpunit34 for PHP unit testing
-# alias phpunit="phpunit34 --stderr"
 
 # Using Git
 alias branch='git branch'
@@ -72,6 +70,7 @@ alias svi='sudo vi'
 alias reboot='sudo /sbin/reboot'
 alias shutdown='sudo /sbin/shutdown'
 alias poweroff='sudo /sbin/poweroff'
+#  poweroff is only on some systems (only Linux, perhaps?)
 
 alias bigfiles="find . -type f 2>/dev/null | xargs du -a 2>/dev/null | awk '{ if ( \$1 > 5000) print \$0 }'"
 alias verybigfiles="find . -type f 2>/dev/null | xargs du -a 2>/dev/null | awk '{ if ( \$1 > 500000) print \$0 }'"
