@@ -68,7 +68,8 @@ moving around in game software for people who didn't have joysticks.)
 
 How about deleting text?  The simplest way is just to "x" it out.  In
 command mode, the "x" will delete the character under the cursor.  If
-you want to delete a whole line, type "dd".
+you want to delete a whole line, type "dd".  To "delete" a newline (in
+other words, to join two lines) use the capital "J".
 
 What if, by accident, you just made a change you didn't mean to make?
 The undo command is "u".  What if you also want to undo the change
@@ -106,6 +107,7 @@ so far:
         arrow keys      cursor movement (or h/j/k/l)
         x               delete character under cursor
         dd              delete entire line cursor is on
+        J               join next line to this line (delete newline)
         u               undo the last change (another u or Control-r to
                             remake the change, depending on version)
         ZZ              write and quit  (also :wq)

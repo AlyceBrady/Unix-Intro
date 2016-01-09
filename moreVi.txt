@@ -1,8 +1,6 @@
 Here are a few more vi tricks that will help you become faster at
 editing files.  Pick out a few at a time to learn and use.
 
-  - J (note capital) "joins" this line and the next, i.e. gets rid of
-        newline between them  -- this is the way to "delete" a newline
   - Finding text:  use /  -- e.g. /text would find the next occurence of
         "text" after the cursor (like command-F on a Mac or control-F on 
         a PC); use ? to search backwards
