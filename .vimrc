@@ -87,8 +87,9 @@ set softtabstop=4
 set autoindent
 set showmatch
 set showmode
-set wrapmargin=8
+set wrapmargin=5
 set nobackup		" do not keep a backup file, use versions instead
+set textwidth=75        " se tw=0 to turn off
 
 highlight Search ctermbg=Gray
 
@@ -96,3 +97,5 @@ highlight Search ctermbg=Gray
 " On Mac, us fn key and F6 key together, eg fn-F6
 nnoremap <F6> :set invpaste paste?<CR>
 set pastetoggle=<F6>
+
+set statusline=[%{&fo}]

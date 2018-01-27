@@ -40,6 +40,8 @@ Creating a repository:
           git clone git://github.com/schacon/grit.git mygrit [new name]
       OR (if ssh git server)
           git clone username@server.school.edu:/directoryPath/grit.git
+      OR (if getting a branch/tag that is not the latest)
+          git clone -b theDesiredTag git://github.com/schacon/grit.git
     If not a collaborator for the original repository, fork it first:
         * Use Fork button on GitHub web page. [now have own copy on GitHub]
         * git clone git://github.com/myUserName/ramp.git [or whatever]
@@ -97,8 +99,12 @@ Looking at branch history/differences:
         git log --pretty=oneline
         git log --pretty=format:"%h - %an, %ar : %s"
         git log -10 --pretty=format:"%h - %an, %ar : %s"
+    To see a history for a particular file:
+        git log --follow filename
     To see a history of branches and commits:
         git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset'
+    To see the list of tags:  git tag  or git tag -l <pattern>
+       or git for-each-ref --sort='*authordate' --format='%(tag)' refs/tags
 
 Editing files:  Do this in the normal way.  Then record changes as below.
 
@@ -146,7 +152,7 @@ Recording changes:
             [or leave out the -m and Git will launch the editor]
     To create a signed annotated tag (need a private key):
         git tag -s v1.5 -m 'my signed 1.5 tag'
-    To see basic info about tag and its commit: git show tagName | head
+    ==> To see basic info about tag and its commit: git show tagName | head
     To push the tags (GitHub Mac application doesn't do this):
         git push --tags
     To see the list of tags:  git tag  or git tag -l <pattern>

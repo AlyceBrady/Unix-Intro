@@ -10,14 +10,16 @@ alias back='cd "$OLDPWD"'
 alias dirt='ls -aFR'
 alias grep='grep --color=auto'
 alias l='ls -aF'
-alias ll='ls -ahlF'
+alias ll='ls -alF'
+alias llround='ls -ahlF'
 alias p='pwd'
-alias recent="ls -alt | head"
+function _recent() { ls -alt $1 | head;}
+alias recent=_recent
 alias wcl='wc -l'
 alias whence='type'
 
 # Related Aliases that depend on Functions
-# grep all files in the current directory
+# grep all files under the current directory
 function _grin() { grep -rn --color $1 .;}
 alias grin=_grin
 # find file by name in (or under) the current directory
@@ -44,10 +46,13 @@ alias gc='git commit'
 alias gcm='git commit -m'
 alias gdiff='git diff --color'
 alias gdiffb='git diff -b --color'
+alias gfilehist='git log --follow'
 alias gl='git log'
 alias gldates='git log --pretty=fuller'
 alias glp='git log --pretty=format:"%h - %an, %ar : %s"'
+alias glrecent='git log -10 --pretty=format:"%h - %an, %ar : %s"'
 alias gls='git log --stat'
+alias gltags="git for-each-ref --sort='*authordate' --format='%(tag)' refs/tags"
 alias gm='git mv'
 alias gr='git rm'
 alias grmR='git rm -rf'
@@ -55,6 +60,7 @@ alias gs='git status'
 alias gss='git status --short'
 alias gp='git push origin master'
 alias gpull='git pull origin master'
+alias gtagbydate="git for-each-ref --sort='*authordate' --format='%(tag)' refs/tags"
 
 # Moving towards sysadmin functions
 alias df='df -H'
