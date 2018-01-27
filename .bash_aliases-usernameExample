@@ -1,0 +1,16 @@
+# Aliases used by username
+#   (aliases below are examples)
+
+# Re: Jupyter Notebooks
+alias jnb='jupyter notebook'
+
+# For working with SD disks
+alias shortdisklist='diskutil list | grep " disk[0-9]$"'
+alias unmountSD='diskutil unmountDisk'
+
+alias comp482="ssh comp482.cs.kzoo.edu"
+alias home_wipi="ssh 192.168.0.99"
+
+alias mysqlklf="mysql -u klf --defaults-file=~/klf.my.cnf"
+
+function scppi() { scp $1 username@192.168.0.99:$2; }
