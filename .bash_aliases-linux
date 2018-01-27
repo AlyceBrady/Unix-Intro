@@ -8,11 +8,11 @@ alias l='ls -aF'
 
 # Distribution-specific aliases for updating software and managing
 # apache services
-case $(lsb_release -i | awk ‘{ print $3 }’) in
+case $(lsb_release -i | awk '{ print $3 }') in
 Ubuntu|Debian)
-    alias apt-get=”sudo apt-get”
-    alias updatey=”sudo apt-get –yes”
-    alias update=’sudo apt-get update && sudo apt-get upgrade’
+    alias apt-get="sudo apt-get"
+    alias updatey="sudo apt-get –yes"
+    alias update='sudo apt-get update && sudo apt-get upgrade'
     if [ $UID -ne 0 ]; then
         alias a2dissite='sudo a2dissite'
         alias a2dismod='sudo a2dismod'
@@ -23,8 +23,8 @@ Ubuntu|Debian)
     fi
     ;;
 CentOS|RedHatEnterpriseServer)
-    alias update=’yum update’
-    alias updatey=’yum -y update’
+    alias update='yum update'
+    alias updatey='yum -y update'
     ;;
 esac
 
